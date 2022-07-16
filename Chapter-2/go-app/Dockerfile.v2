@@ -1,0 +1,26 @@
+FROM golang:1.16.15 AS BUILD
+
+ENV GOPATH=
+
+WORKDIR /usr/src/go
+
+COPY go.mod .
+COPY go.sum .
+
+RUN go mod download
+
+COPY main.go .
+
+RUN go build
+
+FROM scratch 
+
+WORKDIR /usr/src/go
+
+COPY --from=BUILD /usr/src/go/go-app .
+
+ENV PORT 4000
+
+EXPOSE 4000
+
+ENTRYPOINt ["./go-app"]
