@@ -1,0 +1,16 @@
+version: '3'
+services:
+  node:
+    image: workshop:node-compose
+    build: 
+      context: node-app
+      dockerfile: dockerfile.v3
+    env_file: node-app/.env 
+    ports:
+      - 80:4000
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
