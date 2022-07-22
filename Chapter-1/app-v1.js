@@ -8,4 +8,4 @@ app.get('/',(req,res) => {
 
 app.listen(port,()=>{
     console.log(`Blazing fast server in running on port ${port}`)
-})``
+})
